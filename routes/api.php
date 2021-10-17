@@ -21,4 +21,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
-Route::apiResource('panics', PanicController::class)->middleware('auth:api');
+Route::post('panic/create', [PanicController::class, 'store']);
+Route::post('panic/cancel', [PanicController::class, 'destroy']);
+Route::get('panic/get', [PanicController::class, 'index']);
+Route::put('panic/update', [PanicController::class, 'update']);
+
+//Route::apiResource('panic', PanicController::class)->middleware('auth:api');
+
