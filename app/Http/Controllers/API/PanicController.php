@@ -17,11 +17,15 @@ class PanicController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    
+    /*public function __construct()
+    {
+        $this->middleware('auth');
+    }*/    
+
     public function index()
     {
         $panics = Panic::all(
-            'id',
+            'panic_id',
             'longitude',
             'latitude',
             'panic_type',
