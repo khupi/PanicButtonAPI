@@ -14,7 +14,8 @@ class CreatePanicsTable extends Migration
     public function up()
     {
         Schema::create('panics', function (Blueprint $table) {
-            $table->id('panic_id');
+            $table->id('id');
+            $table->unsignedBigInteger('user_id');
             $table->timestamp('created_at')->nullable();
             $table->string('longitude', 255);
             $table->string('latitude', 255);
@@ -24,6 +25,7 @@ class CreatePanicsTable extends Migration
             $table->string('wayne_id')->nullable();
             $table->bigInteger('deleted')->default(0);
             $table->bigInteger('user_delete')->default(0);
+            $table->foreign('user_id')->references('id')->on('users'); 
         });
     }
 

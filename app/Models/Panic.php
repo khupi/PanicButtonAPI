@@ -14,5 +14,5 @@ class Panic extends Model
         'latitude',
         'panic_type',
         'details'
-    ];  
+    ];
 }

@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use App\Models\User;
 
 class CreateUser extends Seeder
 {
@@ -16,10 +17,19 @@ class CreateUser extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
+        User::create([
             'name' => 'Commissioner Gordon',
             'email' => 'gordon@gothampd.com',
-            'password' => Hash::make('123456'),
-        ]);
+            //'email_verified_at' => now(),
+            'password' => bcrypt('123456'),
+            //'remember_token' => Str::random(10),
+       ]);
+
+       User::create([
+        'name' => 'Khupi',
+        'email' => 'makhup7070@gmail',
+        'password' => bcrypt('123456'),
+    ]);
+       
     }
 }

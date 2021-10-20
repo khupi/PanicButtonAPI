@@ -2,8 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\API\AuthController;
-use App\Http\Controllers\API\PanicController;
+use App\Http\Controllers\PanicController;
+use App\Http\Controllers\AuthController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -18,13 +19,17 @@ use App\Http\Controllers\API\PanicController;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::post('register', [AuthController::class, 'register']);
-Route::post('login', [AuthController::class, 'login']);
 
-Route::post('panic/create', [PanicController::class, 'store']);
-Route::post('panic/cancel', [PanicController::class, 'destroy']);
-Route::get('panic/get', [PanicController::class, 'index']);
-Route::put('panic/update', [PanicController::class, 'update']);
+Route::post('register', [AuthController::class, 'signup']);
+Route::post('login', [AuthController::class, 'signin']);
 
-//Route::apiResource('panic', PanicController::class)->middleware('auth:api');
+Route::middleware('auth:api')->group(function () {
+    Route::resource('v1/panic/create', PanicController::class);
+    Route::resource('v1/panic/get', PanicController::class);  
+});
+
+Route::post('v1/panic/cancel', [PanicController::class, 'destroy']);
+
+
+
 
